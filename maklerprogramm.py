@@ -6,3 +6,4 @@ highestnumber = cursor.execute(f"SELECT MAX(ObjektID) FROM Objekte")
 conn.close()
 
 print(highestnumber)
+print("Hallo")
