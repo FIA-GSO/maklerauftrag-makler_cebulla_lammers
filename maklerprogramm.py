@@ -7,6 +7,7 @@
 ############################################################
 
 import sqlite3
+gesamtflaeche = 0
 
 # Get highest number from the database and store it as "ObjektID" 
 
@@ -50,4 +51,9 @@ for i in raumanzahl:
             raumflaeche = raumflaeche - zusatzflaeche
         weitere_flaeche = input("Soll eine weitere Fläche hinzugefügt werden? (y/n)")
     print(raumflaeche + "m2")
+    gesamtflaeche = gesamtflaeche + raumflaeche
+
+    conn = sqlite3.connect("Maklerdatenbank.db")
+    cursor = conn.cursor()
+    conn.close()
 
