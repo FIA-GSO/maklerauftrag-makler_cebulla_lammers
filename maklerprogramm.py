@@ -18,7 +18,7 @@ conn.close()
 
 Objektname = input("Name des Objekts:")
 ObjektID = highestnumber[0] + 1
-print("Objektname ist:" + Objektname)
+print("Objektname" + Objektname)
 print("ObjektID ist:" + ObjektID)
 
 # get the number of rooms to calculate
@@ -34,4 +34,4 @@ for i in raumanzahl:
     raumflaeche = int(laengstewand) * int(angrenzendewand)
     raumflaeche = raumflaeche / 10000
     print(raumflaeche + "m2")
-    
+
