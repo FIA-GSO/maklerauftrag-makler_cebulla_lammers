@@ -18,8 +18,8 @@ conn.close()
 
 Objektname = input("Name des Objekts:")
 ObjektID = highestnumber[0] + 1
-print("Objektname" + Objektname)
-print("ObjektID ist:" + ObjektID)
+print("Objektname: " + Objektname)
+print("ObjektID ist: " + str(ObjektID))
 
 # get the number of rooms to calculate
 
@@ -33,5 +33,21 @@ for i in raumanzahl:
     angrenzendewand = input("90° angrenzende Wand (in cm):")
     raumflaeche = int(laengstewand) * int(angrenzendewand)
     raumflaeche = raumflaeche / 10000
+    weitere_flaeche = input("Soll eine weitere Fläche hinzugefügt werden? (y/n)")
+    while weitere_flaeche == "y":
+        flaechenart = input("Soll eine Fläche addiert oder subtrahiert werden? (+/-)")
+        if flaechenart == "+":
+            wand1 = input("Erste Wand (in cm):")
+            wand2 = input("Zweite Wand (in cm):")
+            zusatzflaeche = int(wand1) * int(wand2)
+            zusatzflaeche = zusatzflaeche / 10000
+            raumflaeche = raumflaeche + zusatzflaeche
+        if flaechenart == "-":
+            wand1 = input("Erste Wand (in cm):")
+            wand2 = input("Zweite Wand (in cm):")
+            zusatzflaeche = int(wand1) * int(wand2)
+            zusatzflaeche = zusatzflaeche / 10000
+            raumflaeche = raumflaeche - zusatzflaeche
+        weitere_flaeche = input("Soll eine weitere Fläche hinzugefügt werden? (y/n)")
     print(raumflaeche + "m2")
 
