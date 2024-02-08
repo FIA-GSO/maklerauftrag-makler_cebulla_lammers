@@ -19,6 +19,3 @@ Alle Daten werden in eine Datenbank geschrieben um auch im Nachhinein noch verf�
 **Soll eine Fläche addiert oder subtrahiert werden?:** Wenn der Raum Flächen hat, welche zusätzlich gezählt werden müssen oder zu viel gezählt werden, kann man diese entfernen
     **Erste Wand:** Die erste Wand der zusätzlichen Fläche
     **Zweite Wand:** Die zweite Wand der zusätzlichen Fläche
-
-## Zusätzliche Infos:
-
