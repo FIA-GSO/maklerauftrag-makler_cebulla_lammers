@@ -1,41 +1,47 @@
-############################################################
-#                                                          #
-#                                                          #
-#           Maklerauftrag - Cebulla, Lammers               #
-#                                                          #
-#                                                          #
-############################################################
-
 import sqlite3
 gesamtflaeche = 0
 raumid = 0
 
-# Erstelle eine Kopfzeile
+# -------- Erstellen eine Kopfzeile --------
 
-print("################################################\n#              Marklerprogramm                 #\n#                                              #\n# - alle Angaben müssen in cm gemacht werden   #\n# - die ObjektID wird automatisch als nächste  #\n#      in der Datenbank freie angegeben        #\n#                                              #\n################################################\n\n")
+print("""
+        ################################################\n
+        #              Marklerprogramm                 #\n
+        #                                              #\n
+        # - alle Angaben müssen in cm gemacht werden   #\n
+        # - die ObjektID wird automatisch als nächste  #\n
+        #      in der Datenbank freie angegeben        #\n
+        #                                              #\n
+        ################################################\n\n
+      """)
 
-# Erhalten der größten bisherigen ObjektID aus der Datenbank und speichern der nächsten Zahl als neue ObjektID 
 
-conn = sqlite3.connect("Maklerdatenbank.db")
+
+
+# -------- Vorbereitung für die Berechnungen --------
+
+
+conn = sqlite3.connect("Maklerdatenbank.db")        # Erhalten der größten bisherigen ObjektID aus der Datenbank und speichern der nächsten Zahl als neue ObjektID
 cursor = conn.cursor()
 cursor.execute(f"SELECT MAX(ObjektID) FROM Objekte")
 highestnumber = cursor.fetchone()
 conn.close()
 
-# Vergeben eines Objektnamens un der ObjektID
 
-Objektname = input("Name des Objekts:")
+Objektname = input("Name des Objekts:")     # Vergeben eines Objektnamens un der ObjektID
 ObjektID = highestnumber[0] + 1
 
-# Erhalten der Information, wie viele Räume das Objakt hat
 
-raumanzahl = int(input("Anzahl der Räume:"))
+raumanzahl = int(input("Anzahl der Räume:"))        # Erhalten der Information, wie viele Räume das Objakt hat
 verbleibenderaeume = raumanzahl
 
 
-# Berechne jeden der angegeben Anzahl von Räumen
 
-while verbleibenderaeume > 0:
+
+# -------- Berechnen der benötigten Werte --------
+
+
+while verbleibenderaeume > 0:       # Berechne jeden der angegeben Anzahl von Räumen
     raumid = raumid + 1
     print("\nRaum " + str(raumid))
     laengstewand = input("Angabe der längsten Wand (in cm):")
@@ -43,9 +49,8 @@ while verbleibenderaeume > 0:
     raumflaeche = int(laengstewand) * int(angrenzendewand)
     raumflaeche = raumflaeche / 10000
     
-    # addieren oder subtrahieren von weiteren Flächen eines Raumes
-    
-    weitere_flaeche = input("\nSoll eine weitere Fläche hinzugefügt werden? (y/n)")
+
+    weitere_flaeche = input("\nSoll eine weitere Fläche hinzugefügt werden? (y/n)")     # addieren oder subtrahieren von weiteren Flächen eines Raumes
     while weitere_flaeche == "y":
         flaechenart = input("Soll eine Fläche addiert oder subtrahiert werden? (+/-)")
 
@@ -65,33 +70,34 @@ while verbleibenderaeume > 0:
         
         weitere_flaeche = input("\nSoll eine weitere Fläche hinzugefügt werden? (y/n)")
     
-    # ausgeben der Raumfläche und Addieren dieser auf die Gesamtfläche
     
-    print("\n" + str(raumflaeche) + " m2 Raumfläche")
+    print("\n" + str(raumflaeche) + " m2 Raumfläche")       # ausgeben der Raumfläche und Addieren dieser auf die Gesamtfläche
     gesamtflaeche = gesamtflaeche + raumflaeche
 
-    # Speichern des jeweiligen Raumes in die Datenbank
 
-    conn = sqlite3.connect("Maklerdatenbank.db")
+    conn = sqlite3.connect("Maklerdatenbank.db")        # Speichern des jeweiligen Raumes in die Datenbank
     cursor = conn.cursor()
     cursor.execute(f"INSERT INTO raeume (ObjektID, RaumID, Raumgroesse) VALUES ({ObjektID}, {raumid}, {raumflaeche})")
     conn.commit()
     conn.close()
 
-    # Berechnen der noch verbleibenden Räume
 
-    verbleibenderaeume = verbleibenderaeume - 1
+    verbleibenderaeume = verbleibenderaeume - 1     # Berechnen der noch verbleibenden Räume
 
-# Speichern der Gesamtfläche und des Objektes in die Datenbank
 
-conn = sqlite3.connect("Maklerdatenbank.db")
+
+
+# -------- Informationsausgabe und Speichern von Informationen --------
+
+
+conn = sqlite3.connect("Maklerdatenbank.db")        # Speichern der Gesamtfläche und des Objektes in die Datenbank
 cursor = conn.cursor()
 cursor.execute(f"INSERT INTO Objekte (ObjektID, ObjektName, Gesamtflaeche, Raumanzahl) VALUES ({ObjektID}, '{Objektname}', {gesamtflaeche}, {raumanzahl})")
 conn.commit()
 conn.close()
 
-# Ausgeben der Informationen
-print("\n\n\n-------- Daten --------")
+
+print("\n\n\n-------- Daten --------")      # Ausgeben der Informationen
 print(f"Objekname: {Objektname}\nObjektID: {ObjektID}\nRaumanzahl: {raumanzahl}\nGesamtfläche: {gesamtflaeche}")
 print("-----------------------\n\n\n")
 
