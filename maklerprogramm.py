@@ -1,12 +1,8 @@
 import sqlite3
 gesamtflaeche = 0
-<<<<<<< HEAD
 raumid = 0
 
 # -------- Erstellen eine Kopfzeile --------
-=======
-# Get highest number from the database and store it as "ObjektID" 
->>>>>>> 5d724ef43b4b31e0851e8498ed3f1e17eb89c46c
 
 print("""
         ################################################\n
@@ -34,11 +30,6 @@ conn.close()
 
 Objektname = input("Name des Objekts:")     # Vergeben eines Objektnamens un der ObjektID
 ObjektID = highestnumber[0] + 1
-<<<<<<< HEAD
-=======
-print("Objektname: " + Objektname)
-print("ObjektID ist: " + str(ObjektID))
->>>>>>> 5d724ef43b4b31e0851e8498ed3f1e17eb89c46c
 
 
 raumanzahl = int(input("Anzahl der R채ume:"))        # Erhalten der Information, wie viele R채ume das Objakt hat
@@ -57,7 +48,6 @@ while verbleibenderaeume > 0:       # Berechne jeden der angegeben Anzahl von R�
     angrenzendewand = input("90째 angrenzende Wand (in cm):")
     raumflaeche = int(laengstewand) * int(angrenzendewand)
     raumflaeche = raumflaeche / 10000
-<<<<<<< HEAD
     
 
     weitere_flaeche = input("\nSoll eine weitere Fl채che hinzugef체gt werden? (y/n)")     # addieren oder subtrahieren von weiteren Fl채chen eines Raumes
@@ -65,29 +55,18 @@ while verbleibenderaeume > 0:       # Berechne jeden der angegeben Anzahl von R�
         flaechenart = input("Soll eine Fl채che addiert oder subtrahiert werden? (+/-)")
 
         if flaechenart == "+":                      # Berechnung wenn etwas addiert werden soll
-=======
-    weitere_flaeche = input("Soll eine weitere Fl채che hinzugef체gt werden? (y/n)")
-    while weitere_flaeche == "y":
-        flaechenart = input("Soll eine Fl채che addiert oder subtrahiert werden? (+/-)")
-        if flaechenart == "+":
->>>>>>> 5d724ef43b4b31e0851e8498ed3f1e17eb89c46c
             wand1 = input("Erste Wand (in cm):")
             wand2 = input("Zweite Wand (in cm):")
             zusatzflaeche = int(wand1) * int(wand2)
             zusatzflaeche = zusatzflaeche / 10000
             raumflaeche = raumflaeche + zusatzflaeche
-<<<<<<< HEAD
         
         if flaechenart == "-":                      # Berechnung wenn etwas subtrahiert werden soll
-=======
-        if flaechenart == "-":
->>>>>>> 5d724ef43b4b31e0851e8498ed3f1e17eb89c46c
             wand1 = input("Erste Wand (in cm):")
             wand2 = input("Zweite Wand (in cm):")
             zusatzflaeche = int(wand1) * int(wand2)
             zusatzflaeche = zusatzflaeche / 10000
             raumflaeche = raumflaeche - zusatzflaeche
-<<<<<<< HEAD
         
         weitere_flaeche = input("\nSoll eine weitere Fl채che hinzugef체gt werden? (y/n)")
     
@@ -123,13 +102,3 @@ print(f"Objekname: {Objektname}\nObjektID: {ObjektID}\nRaumanzahl: {raumanzahl}\
 print("-----------------------\n\n\n")
 
 input("Beliebige Taste zum beenden dr체cken")
-=======
-        weitere_flaeche = input("Soll eine weitere Fl채che hinzugef체gt werden? (y/n)")
-    print(raumflaeche + "m2")
-    gesamtflaeche = gesamtflaeche + raumflaeche
-    
-    conn = sqlite3.connect("Maklerdatenbank.db")
-    cursor = conn.cursor()
-    cursor.execute(f"SELECT MAX(ObjektID) FROM Objekte")
-    conn.close()
->>>>>>> 5d724ef43b4b31e0851e8498ed3f1e17eb89c46c
